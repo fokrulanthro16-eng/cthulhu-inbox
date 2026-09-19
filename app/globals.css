@@ -1,0 +1,234 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-phosphor: #00ff66;
+  --color-phosphor-glow: rgba(0, 255, 102, 0.45);
+  --color-void: #020403;
+}
+
+body {
+  background-color: #010402;
+  color: #00ff66;
+  font-family: 'Courier New', Courier, monospace;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+/* Phosphor Glow Text Utility */
+.glow-text {
+  text-shadow: 0 0 6px rgba(0, 255, 102, 0.75), 0 0 14px rgba(0, 255, 102, 0.4);
+}
+
+.glow-blood {
+  text-shadow: 0 0 6px rgba(255, 34, 68, 0.8), 0 0 16px rgba(255, 34, 68, 0.45);
+}
+
+.glow-amber {
+  text-shadow: 0 0 6px rgba(255, 170, 0, 0.8), 0 0 16px rgba(255, 170, 0, 0.45);
+}
+
+.glow-purple {
+  text-shadow: 0 0 6px rgba(157, 78, 221, 0.8), 0 0 16px rgba(157, 78, 221, 0.45);
+}
+
+/* CRT Scanlines Overlay */
+.crt-scanlines {
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%,
+    rgba(0, 0, 0, 0.45) 50%
+  ),
+  linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.04),
+    rgba(0, 255, 0, 0.02),
+    rgba(0, 0, 255, 0.04)
+  );
+  background-size: 100% 3px, 4px 100%;
+  pointer-events: none;
+}
+
+/* Aggressive Scanline Flicker for Sanity Meltdown (<35%) */
+.crt-scanlines-meltdown {
+  animation: scanlineMeltdown 0.12s infinite alternate;
+  background-size: 100% 4px, 6px 100%;
+}
+
+@keyframes scanlineMeltdown {
+  0% { opacity: 0.85; filter: contrast(180%); }
+  50% { opacity: 0.45; filter: contrast(120%); }
+  100% { opacity: 1; filter: contrast(240%); }
+}
+
+/* Moving Scanline Bar */
+.crt-beam {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 255, 102, 0.06) 50%,
+    transparent 100%
+  );
+  height: 120px;
+  pointer-events: none;
+}
+
+/* CRT Curved Barrel Distortion Wrapper */
+.crt-bezel {
+  box-shadow: 
+    inset 0 0 120px rgba(0, 0, 0, 0.95),
+    inset 0 0 40px rgba(0, 255, 102, 0.12),
+    0 0 40px rgba(0, 0, 0, 0.9);
+  border: 12px solid #08140c;
+  border-radius: 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* CRT Screen Corner Vignette and Curve Simulation */
+.crt-screen-curvature {
+  border-radius: 18px;
+  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.85);
+}
+
+/* Glass Reflection Highlight */
+.crt-glare {
+  background: radial-gradient(
+    circle at 35% 20%,
+    rgba(255, 255, 255, 0.035) 0%,
+    transparent 60%
+  );
+  pointer-events: none;
+}
+
+/* Terminal Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #020603;
+  border-left: 1px solid #00471b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #008f39;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00ff66;
+  box-shadow: 0 0 8px #00ff66;
+}
+
+/* Glitch Corrupted Text */
+.glitch-text {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch-text::before {
+  left: 2px;
+  text-shadow: -2px 0 #ff2244;
+  clip-path: rect(24px, 550px, 90px, 0);
+  animation: glitch-anim-1 2s infinite linear alternate-reverse;
+}
+
+.glitch-text::after {
+  left: -2px;
+  text-shadow: -2px 0 #00ffff;
+  clip-path: rect(85px, 550px, 140px, 0);
+  animation: glitch-anim-2 2.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim-1 {
+  0% { clip-path: inset(20% 0 60% 0); transform: skew(0.3deg); }
+  20% { clip-path: inset(60% 0 10% 0); transform: skew(-0.5deg); }
+  40% { clip-path: inset(40% 0 40% 0); transform: skew(0.6deg); }
+  60% { clip-path: inset(80% 0 5% 0); transform: skew(-0.3deg); }
+  80% { clip-path: inset(10% 0 70% 0); transform: skew(0.4deg); }
+  100% { clip-path: inset(30% 0 50% 0); transform: skew(-0.2deg); }
+}
+
+@keyframes glitch-anim-2 {
+  0% { clip-path: inset(10% 0 70% 0); transform: skew(-0.4deg); }
+  20% { clip-path: inset(50% 0 30% 0); transform: skew(0.3deg); }
+  40% { clip-path: inset(20% 0 60% 0); transform: skew(-0.5deg); }
+  60% { clip-path: inset(70% 0 15% 0); transform: skew(0.4deg); }
+  80% { clip-path: inset(30% 0 55% 0); transform: skew(-0.2deg); }
+  100% { clip-path: inset(60% 0 25% 0); transform: skew(0.5deg); }
+}
+
+/* Rubber Stamp Slam Animation */
+.animate-stamp-slam {
+  animation: stampSlam 0.28s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+  transform-origin: center center;
+}
+
+@keyframes stampSlam {
+  0% {
+    opacity: 0;
+    transform: scale(3.2) rotate(-22deg);
+    filter: blur(4px);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(0.94) rotate(-6deg);
+    filter: blur(0px);
+  }
+  85% {
+    transform: scale(1.04) rotate(-7deg);
+  }
+  100% {
+    opacity: 0.98;
+    transform: scale(1) rotate(-6deg);
+  }
+}
+
+/* Screen Rumble Animation (0.4s) for Drive Mad action */
+.animate-screen-rumble {
+  animation: screenRumble 0.4s ease-in-out forwards;
+}
+
+@keyframes screenRumble {
+  0%, 100% { transform: translate(0, 0); }
+  15% { transform: translate(4px, -3px); }
+  30% { transform: translate(-4px, 4px); }
+  45% { transform: translate(3px, -2px); }
+  60% { transform: translate(-2px, 3px); }
+  75% { transform: translate(2px, -1px); }
+  90% { transform: translate(-1px, 1px); }
+}
+
+/* Floating Eldritch Whisper Glyphs (<35% sanity) */
+.whisper-glyph {
+  position: absolute;
+  pointer-events: none;
+  font-family: monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  opacity: 0.22;
+  color: #ff2244;
+  text-shadow: 0 0 8px rgba(255, 34, 68, 0.7);
+  animation: whisperPulse 4s infinite ease-in-out;
+  user-select: none;
+  z-index: 25;
+}
+
+@keyframes whisperPulse {
+  0%, 100% { opacity: 0.08; transform: translateY(0) scale(0.98); }
+  50% { opacity: 0.35; transform: translateY(-8px) scale(1.02); }
+}
