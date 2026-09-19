@@ -26,6 +26,19 @@ Every decision carries an existential cost: ratifying doomsday pacts extracts sa
 
 ---
 
+## 📸 Preview & Gameplay
+
+### Dashboard View
+![Cthulhu Terminal](public/screenshots/terminal-overview.png)
+
+### Sanction Doom State
+![Sanctioned Decree](public/screenshots/sanction-decree.png)
+
+### Cerebral Extinction
+![Total Cerebral Extinction](public/screenshots/meltdown-state.png)
+
+---
+
 ## ⚡ Key Features
 
 - **📺 Retro CRT Phosphor Terminal**:
